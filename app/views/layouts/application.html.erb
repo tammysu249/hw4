@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tammy's Travel Journal</title>
+    <title>Travel Journal</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,15 +10,19 @@
   </head>
 
   <body>
+   
     <div>
+      <% if @current_user %>
+        Hello, <%= @current_user.username %>
+        <%= button_to "Logout", "/sessions/logout", method: :delete %>
+      <% else %>
+        <a href="/sessions/new">Login</a> | <a href="/users/new">Signup</a>
+      <% end %>
+    </div>
+
+    <p>
       <%= flash[:notice] %>
-    </div>
-    <div>
-      <a href="/">Home</a>
-      <%#= button_to "Logout", "/sessions/logout", method: :delete %>
-      <a href="/sessions/new">Login</a>
-      <a href="/users/new">Signup</a>
-    </div>
+    </p>
 
     <%= yield %>
   </body>
